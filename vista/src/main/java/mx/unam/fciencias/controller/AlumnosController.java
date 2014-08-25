@@ -9,8 +9,10 @@ package mx.unam.fciencias.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import mx.unam.fciencias.model.dto.AlumnoDto;
 
 
@@ -46,7 +48,10 @@ public class AlumnosController {
             alumnos.remove(almn);
         }
         else{
-        
+            FacesContext fc=FacesContext.getCurrentInstance();
+            fc.addMessage("validacion", 
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Alumno repetido"));
+            
        }
     }
 

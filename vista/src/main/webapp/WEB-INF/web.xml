@@ -19,7 +19,7 @@
  
 	<!-- Pagina de Inicio  -->
 	<welcome-file-list>
-		<welcome-file>faces/inicio.xhtml</welcome-file>
+		<welcome-file>faces/VistaAlumnos.xhtml</welcome-file>
 	</welcome-file-list>
  
 	<!-- JSF mapping -->

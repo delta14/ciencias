@@ -12,22 +12,27 @@ and open the template in the editor.
       >
    
     <body>
+        <p:messages autoUpdate="true" id="validacion" showSummary="true" globalOnly="true"  />
         <h:form id="formAlumno">
             <h:panelGrid columns="3">
                 <h:outputLabel value="Nombre:" />
-                <p:inputText id="nombre" value="#{alumnosController.alumno.nombre}" required="true" />
+                <p:inputText id="nombre" validatorMessage="Formato Incorrecto" value="#{alumnosController.alumno.nombre}" required="true">
+                    <f:validateRegex pattern="^[A-Z][a-z]{2,10}(\s[A-Z][a-z]{2,10}){0,3}$" />
+                </p:inputText>
                 <p:message for="nombre" />
                 
                 <h:outputLabel value="Apellido paterno"/>
-                <p:inputText id="apellidoPaterno" value="#{alumnosController.alumno.apellidoPaterno}" />
+                <p:inputText id="apellidoPaterno" value="#{alumnosController.alumno.apellidoPaterno}" required="true" />
                 <p:message for="apellidoPaterno" />
                 
                 <h:outputLabel value="Apellido materno"/>
-                <p:inputText id="apellidoMaterno" value="#{alumnosController.alumno.apellidoMaterno}" />
+                <p:inputText id="apellidoMaterno" value="#{alumnosController.alumno.apellidoMaterno}" required="true" />
                 <p:message for="apellidoMaterno" />
                 
                 <h:outputLabel value="Número de cuenta"/>
-                <p:inputText id="cuenta" value="#{alumnosController.alumno.numeroCuenta}" />
+                <p:inputText id="cuenta" validatorMessage="Formato incorrecto" value="#{alumnosController.alumno.numeroCuenta}" required="true">
+                    <f:validateRegex pattern="^[0-9]{9}$" />
+                </p:inputText>
                 <p:message for="cuenta" />
                 
                 <p:commandButton ajax="true" 
@@ -42,6 +47,11 @@ and open the template in the editor.
                     <p:column headerText="Número de cuenta">#{_alumno.numeroCuenta}</p:column>
                 </p:dataTable>
             </h:panelGrid>
+        </h:form>
+        <h:form>
+            <h:commandLink action="inicio" value="Ir a inicio" />
+            <br/>
+            <h:commandLink action="saludo" value="Ir a saludo" />
         </h:form>
     </body>
 </html>
