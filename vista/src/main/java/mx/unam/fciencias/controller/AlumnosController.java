@@ -36,7 +36,9 @@ public class AlumnosController {
     
     public void guardaAlumno(){
         if(alumnos.contains(alumno)){
-        
+           FacesContext fc=FacesContext.getCurrentInstance();
+            fc.addMessage("validacion", 
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Alumno repetido"));
         }else{
             alumnos.add(alumno);
             alumno=new AlumnoDto();
@@ -48,9 +50,7 @@ public class AlumnosController {
             alumnos.remove(almn);
         }
         else{
-            FacesContext fc=FacesContext.getCurrentInstance();
-            fc.addMessage("validacion", 
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Alumno repetido"));
+         
             
        }
     }
