@@ -10,8 +10,12 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       >
-   
-    <body>
+    
+    <h:head>
+        <title>JavaServerFaces 2.0</title>
+    </h:head>
+    
+    <h:body>
         <p:messages autoUpdate="true" id="validacion" showSummary="true" globalOnly="true"  />
         <h:form id="formAlumno">
             <h:panelGrid columns="3">
@@ -53,5 +57,5 @@ and open the template in the editor.
             <br/>
             <h:commandLink action="saludo" value="Ir a saludo" />
         </h:form>
-    </body>
+    </h:body>
 </html>
