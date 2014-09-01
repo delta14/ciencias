@@ -62,7 +62,7 @@ and open the template in the editor.
                     <p:column headerText="Apellido materno">#{_alumno.apellidoMaterno}</p:column>
                     <p:column headerText="Número de cuenta">#{_alumno.numeroCuenta}</p:column>
                     <p:column><p:commandButton actionListener="#{alumnosController.borraAlumno(_alumno)}" update="@form"/></p:column>
-                    <p:column ><p:commandButton actionListener="#{alumnosController.setAlumnoSeleccionado(_alumno)}" update="@form :detalles"  ajax="true" /></p:column>
+                    <p:column ><p:commandButton actionListener="#{alumnosController.setAlumnoSeleccionado(_alumno)}" update="@form :detalles" type="button" ajax="true" onclick="PF('detalleAlumno').show()" /></p:column>
           </p:dataTable>
             
             
@@ -71,7 +71,7 @@ and open the template in the editor.
         <br/>
         <br/>
         <h:form id="detalles">
-               <!--p:dialog widgetVar="detalleAlumno" -->
+               <p:dialog widgetVar="detalleAlumno" >
                <p:panelGrid columns="2" rendered="#{alumnosController.alumnoSeleccionado ne null}" >
                     <p:outputLabel value="Nombre"/>
                     <p:outputLabel value="#{alumnosController.alumnoSeleccionado.nombre}" />
@@ -85,7 +85,7 @@ and open the template in the editor.
                      <p:outputLabel value="Cuenta"/>
                      <p:outputLabel value="#{alumnosController.alumnoSeleccionado.numeroCuenta}" />
                 </p:panelGrid>
-            <!--/p:dialog-->
+            </p:dialog>
         </h:form>
       
         
