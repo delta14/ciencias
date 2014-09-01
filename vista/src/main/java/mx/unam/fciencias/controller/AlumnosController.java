@@ -28,6 +28,8 @@ public class AlumnosController {
     
     private Collection<AlumnoDto> alumnos;
     
+    private AlumnoDto alumnoSeleccionado;
+    
     @PostConstruct
     public void init(){
         alumno=new AlumnoDto();
@@ -69,6 +71,14 @@ public class AlumnosController {
 
     public void setAlumnos(Collection<AlumnoDto> alumnos) {
         this.alumnos = alumnos;
+    }
+
+    public AlumnoDto getAlumnoSeleccionado() {
+        return alumnoSeleccionado;
+    }
+
+    public void setAlumnoSeleccionado(AlumnoDto alumnoSeleccionado) {
+        this.alumnoSeleccionado = alumnoSeleccionado;
     }
     
     

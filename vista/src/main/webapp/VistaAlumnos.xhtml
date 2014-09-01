@@ -33,7 +33,7 @@ and open the template in the editor.
                 
                 <h:outputLabel value="Apellido materno"/>
                 <p:inputText id="apellidoMaterno" value="#{alumnosController.alumno.apellidoMaterno}" required="true" validatorMessage="Formato Incorrecto">
-                     <f:validateRegex pattern="^[A-Z][a-z]{2,10}(\s[A-Z][a-z]{2,10}){0,3}$" />
+                     <f:validateRegex pattern="^[A-Z]([a-z]){2,10}(\s[A-Z][a-z]{2,10}){0,3}$" />
                 </p:inputText>
                 <p:message for="apellidoMaterno" />
                 
@@ -44,19 +44,55 @@ and open the template in the editor.
                 <p:message for="cuenta" />
                 
                 <p:commandButton ajax="true" 
-                                 update="@form" 
+                                 update="@form :lista" 
                                  actionListener="#{alumnosController.guardaAlumno()}" /> 
                 
                 
-                <p:dataTable value="#{alumnosController.alumnos}" var="_alumno" >
+              
+            </h:panelGrid>
+        </h:form>
+        
+        
+         
+    
+        <h:form id="lista">
+          <p:dataTable value="#{alumnosController.alumnos}" var="_alumno" >
                     <p:column headerText="Nombre">#{_alumno.nombre}</p:column>
                     <p:column headerText="Apellido paterno">#{_alumno.apellidoPaterno}</p:column>
                     <p:column headerText="Apellido materno">#{_alumno.apellidoMaterno}</p:column>
                     <p:column headerText="Número de cuenta">#{_alumno.numeroCuenta}</p:column>
-                </p:dataTable>
-            </h:panelGrid>
+                    <p:column><p:commandButton actionListener="#{alumnosController.borraAlumno(_alumno)}" update="@form"/></p:column>
+                    <p:column ><p:commandButton actionListener="#{alumnosController.setAlumnoSeleccionado(_alumno)}" update="@form :detalles"  ajax="true" /></p:column>
+          </p:dataTable>
+            
+            
         </h:form>
+        
+        <br/>
+        <br/>
+        <h:form id="detalles">
+               <!--p:dialog widgetVar="detalleAlumno" -->
+               <p:panelGrid columns="2" rendered="#{alumnosController.alumnoSeleccionado ne null}" >
+                    <p:outputLabel value="Nombre"/>
+                    <p:outputLabel value="#{alumnosController.alumnoSeleccionado.nombre}" />
+                    
+                     <p:outputLabel value="Apellido Paterno"/>
+                     <p:outputLabel value="#{alumnosController.alumnoSeleccionado.apellidoPaterno}" />
+                    
+                     <p:outputLabel value="Apellido Materno"/>
+                     <p:outputLabel value="#{alumnosController.alumnoSeleccionado.apellidoMaterno}" />
+                    
+                     <p:outputLabel value="Cuenta"/>
+                     <p:outputLabel value="#{alumnosController.alumnoSeleccionado.numeroCuenta}" />
+                </p:panelGrid>
+            <!--/p:dialog-->
+        </h:form>
+      
+        
         <h:form>
+            
+            
+            
             <h:commandLink action="inicio" value="Ir a inicio (redirect)" />
             <br/>
             <h:commandLink action="saludo" value="Ir a saludo (forward)" />
