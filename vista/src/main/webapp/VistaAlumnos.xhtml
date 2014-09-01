@@ -26,14 +26,18 @@ and open the template in the editor.
                 <p:message for="nombre" />
                 
                 <h:outputLabel value="Apellido paterno"/>
-                <p:inputText id="apellidoPaterno" value="#{alumnosController.alumno.apellidoPaterno}" required="true" />
+                <p:inputText id="apellidoPaterno" value="#{alumnosController.alumno.apellidoPaterno}" required="true" validatorMessage="Formato Incorrecto">
+                    <f:validateRegex pattern="^[A-Z][a-z]{2,10}(\s[A-Z][a-z]{2,10}){0,3}$" />
+                </p:inputText>
                 <p:message for="apellidoPaterno" />
                 
                 <h:outputLabel value="Apellido materno"/>
-                <p:inputText id="apellidoMaterno" value="#{alumnosController.alumno.apellidoMaterno}" required="true" />
+                <p:inputText id="apellidoMaterno" value="#{alumnosController.alumno.apellidoMaterno}" required="true" validatorMessage="Formato Incorrecto">
+                     <f:validateRegex pattern="^[A-Z][a-z]{2,10}(\s[A-Z][a-z]{2,10}){0,3}$" />
+                </p:inputText>
                 <p:message for="apellidoMaterno" />
                 
-                <h:outputLabel value="Número de cuenta"/>
+                <h:outputLabel value="Numero de cuenta"/>
                 <p:inputText id="cuenta" validatorMessage="Formato incorrecto" value="#{alumnosController.alumno.numeroCuenta}" required="true">
                     <f:validateRegex pattern="^[0-9]{9}$" />
                 </p:inputText>
@@ -53,9 +57,9 @@ and open the template in the editor.
             </h:panelGrid>
         </h:form>
         <h:form>
-            <h:commandLink action="inicio" value="Ir a inicio" />
+            <h:commandLink action="inicio" value="Ir a inicio (redirect)" />
             <br/>
-            <h:commandLink action="saludo" value="Ir a saludo" />
+            <h:commandLink action="saludo" value="Ir a saludo (forward)" />
         </h:form>
     </h:body>
 </html>

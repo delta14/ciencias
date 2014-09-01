@@ -9,7 +9,7 @@
     <application>
      	   <locale-config>
      	        <default-locale>es</default-locale>    
-     	   </locale-config>
+     	   </locale-config>   
      </application>
      <managed-bean>
          <managed-bean-name>fecha</managed-bean-name>
@@ -21,12 +21,17 @@
          <from-view-id>/*</from-view-id>
          <navigation-case>
              <from-outcome>inicio</from-outcome>
-             <to-view-id>/faces/Saludo.xhtml</to-view-id>
+             <to-view-id>Saludo.xhtml</to-view-id>
+             <redirect/>
+         </navigation-case>
+          <navigation-case>
+             <from-outcome>alumnos</from-outcome>
+             <to-view-id>VistaAlumnos.xhtml</to-view-id>
              <redirect/>
          </navigation-case>
          <navigation-case> 
              <from-outcome>saludo</from-outcome>
-             <to-view-id>/faces/inicio.xhtml</to-view-id>
+             <to-view-id>inicio.xhtml</to-view-id>
          </navigation-case>
      </navigation-rule>
 
