@@ -7,9 +7,9 @@
     version="2.0">
 
     <application>
-     	   <locale-config>
-     	        <default-locale>es</default-locale>    
+     	   <locale-config>  
                 <supported-locale>en</supported-locale>
+                <supported-locale>es</supported-locale>
      	   </locale-config>   
      </application>
      <managed-bean>
@@ -33,6 +33,12 @@
          <navigation-case> 
              <from-outcome>saludo</from-outcome>
              <to-view-id>inicio.xhtml</to-view-id>
+             <redirect/>
+         </navigation-case>
+         <navigation-case> 
+             <from-outcome>mensaje</from-outcome>
+             <to-view-id>mensaje.xhtml</to-view-id>
+             <redirect/>
          </navigation-case>
      </navigation-rule>
 
