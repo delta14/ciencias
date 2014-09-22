@@ -27,7 +27,6 @@ public abstract class AbstractDAO<T> {
 
     public void create(T t) {
         em.persist(t);
-        
     }
 
     public T find(Long id) {

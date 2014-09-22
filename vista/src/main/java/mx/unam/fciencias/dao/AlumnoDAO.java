@@ -14,8 +14,8 @@ import mx.unam.fciencias.model.dto.AlumnoDto;
  */
 public class AlumnoDAO extends AbstractDAO<AlumnoDto>{
 
-    public AlumnoDAO(Class<AlumnoDto> c) {
-        super(c);
+    public AlumnoDAO() {
+        super(AlumnoDto.class);
     }
     
 }

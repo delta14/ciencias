@@ -7,6 +7,7 @@
 package mx.unam.fciencias.model.dto;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -49,6 +50,10 @@ public class AlumnoDto implements Serializable{
     @NotNull
     @Size(max = 9)
     private String numeroCuenta;
+    
+    private Carrera carrera;
+    
+    private Collection<Profesor> profesores ;
 
     public AlumnoDto() {
     }
@@ -108,4 +113,16 @@ public class AlumnoDto implements Serializable{
     
     
     }    
+
+    private static class Profesor {
+
+        public Profesor() {
+        }
+    }
+
+    private static class Carrera {
+
+        public Carrera() {
+        }
+    }
 }

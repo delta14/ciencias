@@ -35,7 +35,7 @@ public class AlumnosController {
     
     @PostConstruct
     public void init(){
-        alumnoDAO=new AlumnoDAO(AlumnoDto.class);
+        alumnoDAO=new AlumnoDAO();
         alumno=new AlumnoDto();
         alumnos=new ArrayList<AlumnoDto>();
     }
@@ -46,7 +46,15 @@ public class AlumnosController {
             fc.addMessage("validacion", 
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Alumno repetido"));
         }else{
-            alumnoDAO.create(alumno);
+            
+            
+       
+        
+        alumnoDAO.getEm().getTransaction().begin();
+          alumnoDAO.create(alumno);
+            alumnoDAO.getEm().getTransaction().commit();
+            
+            
             alumnos.add(alumno);
             alumno=new AlumnoDto();
         }
