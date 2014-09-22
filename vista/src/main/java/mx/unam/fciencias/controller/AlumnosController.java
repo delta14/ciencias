@@ -13,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import mx.unam.fciencias.dao.AlumnoDAO;
 import mx.unam.fciencias.model.dto.AlumnoDto;
 
 
@@ -30,8 +31,11 @@ public class AlumnosController {
     
     private AlumnoDto alumnoSeleccionado;
     
+    private AlumnoDAO alumnoDAO;
+    
     @PostConstruct
     public void init(){
+        alumnoDAO=new AlumnoDAO(AlumnoDto.class);
         alumno=new AlumnoDto();
         alumnos=new ArrayList<AlumnoDto>();
     }
@@ -42,6 +46,7 @@ public class AlumnosController {
             fc.addMessage("validacion", 
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Alumno repetido"));
         }else{
+            alumnoDAO.create(alumno);
             alumnos.add(alumno);
             alumno=new AlumnoDto();
         }

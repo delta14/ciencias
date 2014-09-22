@@ -7,19 +7,47 @@
 package mx.unam.fciencias.model.dto;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author guillermorojas
  */
+@Entity
+@Table(name = "alumno")
+@NamedQueries(
+        {
+        @NamedQuery(name=AlumnoDto.SELECT_ALL,query="SELECT a FROM AlumnoDto a")
+        }
+)
 public class AlumnoDto implements Serializable{
+    public static final String SELECT_ALL="select all";
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id; 
     
+    @NotNull
+    @Size(min = 2,max = 50)
     private String nombre;
     
+    @NotNull
+    @Size(min = 2,max = 50)
     private String apellidoPaterno;
     
+    @NotNull
+    @Size(min = 2,max = 50)
     private String apellidoMaterno;
     
+    @NotNull
+    @Size(max = 9)
     private String numeroCuenta;
 
     public AlumnoDto() {
