@@ -33,7 +33,7 @@ public class AlumnoDto implements Serializable{
     public static final String SELECT_ALL="select all";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id; 
+    private Long id; 
     
     @NotNull
     @Size(min = 2,max = 50)
@@ -50,10 +50,6 @@ public class AlumnoDto implements Serializable{
     @NotNull
     @Size(max = 9)
     private String numeroCuenta;
-    
-    private Carrera carrera;
-    
-    private Collection<Profesor> profesores ;
 
     public AlumnoDto() {
     }
@@ -96,14 +92,29 @@ public class AlumnoDto implements Serializable{
     public void setNumeroCuenta(String numeroCuenta) {
         this.numeroCuenta = numeroCuenta;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    
     
     
     @Override
     public boolean equals(Object object){
-        if(!(object instanceof AlumnoDto) && object!=null){
+        if( object==null || !(object instanceof AlumnoDto) ){
             return false;
         }
+        
+        
         AlumnoDto alumno=(AlumnoDto)object;
+         if ((this.id == null && alumno.id != null) || (this.id != null && !this.id.equals(alumno.id))) {
+            return false;
+        }
         if(alumno.getNumeroCuenta()!=null && alumno.getNumeroCuenta().equals(this.numeroCuenta) ){
             return true;
         }
@@ -113,16 +124,13 @@ public class AlumnoDto implements Serializable{
     
     
     }    
-
-    private static class Profesor {
-
-        public Profesor() {
-        }
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
     }
 
-    private static class Carrera {
-
-        public Carrera() {
-        }
-    }
+ 
 }

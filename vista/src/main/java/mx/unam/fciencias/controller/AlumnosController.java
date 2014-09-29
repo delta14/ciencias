@@ -38,6 +38,7 @@ public class AlumnosController {
         alumnoDAO=new AlumnoDAO();
         alumno=new AlumnoDto();
         alumnos=new ArrayList<AlumnoDto>();
+        alumnos.addAll(alumnoDAO.selectAllAlumnos());
     }
     
     public void guardaAlumno(){
@@ -46,28 +47,31 @@ public class AlumnosController {
             fc.addMessage("validacion", 
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Alumno repetido"));
         }else{
-            
-            
-       
-        
+
         alumnoDAO.getEm().getTransaction().begin();
           alumnoDAO.create(alumno);
             alumnoDAO.getEm().getTransaction().commit();
             
-            
-            alumnos.add(alumno);
             alumno=new AlumnoDto();
         }
+        alumnos=new ArrayList<AlumnoDto>();
+        alumnos.addAll(alumnoDAO.selectAllAlumnos());
     }
     
     public void borraAlumno(AlumnoDto almn){
         if(alumnos.contains(almn)){
-            alumnos.remove(almn);
+            alumnoDAO.getEm().getTransaction().begin();
+            alumnoDAO.delete(almn.getId());
+            alumnoDAO.getEm().getTransaction().commit();
         }
         else{
-         
-            
+             FacesContext fc=FacesContext.getCurrentInstance();
+            fc.addMessage("validacion", 
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Error en la operacion"));
+   
        }
+        alumnos=new ArrayList<AlumnoDto>();
+        alumnos.addAll(alumnoDAO.selectAllAlumnos());
     }
 
     public AlumnoDto getAlumno() {

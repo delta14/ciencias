@@ -9,95 +9,94 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"  
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
- 
-      >
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     
     <h:head>
         <title>JavaServerFaces 2.0</title>
     </h:head>
     
-    
     <h:body>
         
-           <ui:composition template="./template/principal.xhtml">
-            
-         
-            <ui:define name="content">
-        <p:growl autoUpdate="true" id="validacion" showSummary="true" showDetail="true"   />
-        <h:form id="formAlumno">
-            <h:panelGrid columns="3">
-                <h:outputLabel value="Nombre:" />
-                <p:inputText id="nombre" validatorMessage="Formato Incorrecto" value="#{alumnosController.alumno.nombre}" required="true">
-                    <f:validateRegex pattern="^[A-Z][a-z]{2,10}(\s[A-Z][a-z]{2,10}){0,3}$" />
-                </p:inputText>
-                <p:message for="nombre" />
+    <ui:composition template="./template/principal.xhtml">
                 
-                <h:outputLabel value="Apellido paterno"/>
-                <p:inputText id="apellidoPaterno" value="#{alumnosController.alumno.apellidoPaterno}" required="true" validatorMessage="Formato Incorrecto">
-                    <f:validateRegex pattern="^[A-Z][a-z]{2,10}(\s[A-Z][a-z]{2,10}){0,3}$" />
-                </p:inputText>
-                <p:message for="apellidoPaterno" />
-                
-                <h:outputLabel value="Apellido materno"/>
-                <p:inputText id="apellidoMaterno" value="#{alumnosController.alumno.apellidoMaterno}" required="true" validatorMessage="Formato Incorrecto">
-                     <f:validateRegex pattern="^[A-Z]([a-z]){2,10}(\s[A-Z][a-z]{2,10}){0,3}$" />
-                </p:inputText>
-                <p:message for="apellidoMaterno" />
-                
-                <h:outputLabel value="Numero de cuenta"/>
-                <p:inputText id="cuenta" validatorMessage="Formato incorrecto" value="#{alumnosController.alumno.numeroCuenta}" required="true">
-                    <f:validateRegex pattern="^[0-9]{9}$" />
-                </p:inputText>
-                <p:message for="cuenta" />
-                
-                <p:commandButton ajax="true" 
-                                 update="@form :lista" 
-                                 actionListener="#{alumnosController.guardaAlumno()}" /> 
-                
-                
-              
-            </h:panelGrid>
-        </h:form>
+      <ui:define name="content">
+            <p:growl autoUpdate="true" id="validacion" showSummary="true" showDetail="true"   />
         
-        
-         
-    
-        <h:form id="lista">
-          <p:dataTable value="#{alumnosController.alumnos}" var="_alumno" >
-                    <p:column headerText="Nombre">#{_alumno.nombre}</p:column>
-                    <p:column headerText="Apellido paterno">#{_alumno.apellidoPaterno}</p:column>
-                    <p:column headerText="Apellido materno">#{_alumno.apellidoMaterno}</p:column>
-                    <p:column headerText="Número de cuenta">#{_alumno.numeroCuenta}</p:column>
-                    <p:column><p:commandButton actionListener="#{alumnosController.borraAlumno(_alumno)}" update="@form"/></p:column>
-                    <p:column ><p:commandButton actionListener="#{alumnosController.setAlumnoSeleccionado(_alumno)}" update="@form :detalles" type="button" ajax="true" onclick="PF('detalleAlumno').show()" /></p:column>
-          </p:dataTable>
-            
-            
-        </h:form>
-        
-        <br/>
-        <br/>
-        <h:form id="detalles">
-               <p:dialog widgetVar="detalleAlumno" >
-               <p:panelGrid columns="2" rendered="#{alumnosController.alumnoSeleccionado ne null}" >
-                    <p:outputLabel value="Nombre"/>
-                    <p:outputLabel value="#{alumnosController.alumnoSeleccionado.nombre}" />
-                    
-                     <p:outputLabel value="Apellido Paterno"/>
-                     <p:outputLabel value="#{alumnosController.alumnoSeleccionado.apellidoPaterno}" />
-                    
-                     <p:outputLabel value="Apellido Materno"/>
-                     <p:outputLabel value="#{alumnosController.alumnoSeleccionado.apellidoMaterno}" />
-                    
-                     <p:outputLabel value="Cuenta"/>
-                     <p:outputLabel value="#{alumnosController.alumnoSeleccionado.numeroCuenta}" />
-                </p:panelGrid>
-            </p:dialog>
-        </h:form>
-      
+            <h:form id="formAlumno">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Nombre:" />
+                    <p:inputText id="nombre" validatorMessage="Formato Incorrecto" value="#{alumnosController.alumno.nombre}" required="true">
+                        <f:validateRegex pattern="^[A-Z][a-z]{2,10}(\s[A-Z][a-z]{2,10}){0,3}$" />
+                    </p:inputText>
+                    <p:message for="nombre" />
 
-       </ui:define>
+                    <h:outputLabel value="Apellido paterno"/>
+                    <p:inputText id="apellidoPaterno" value="#{alumnosController.alumno.apellidoPaterno}" required="true" validatorMessage="Formato Incorrecto">
+                        <f:validateRegex pattern="^[A-Z][a-z]{2,10}(\s[A-Z][a-z]{2,10}){0,3}$" />
+                    </p:inputText>
+                    <p:message for="apellidoPaterno" />
+
+                    <h:outputLabel value="Apellido materno"/>
+                    <p:inputText id="apellidoMaterno" value="#{alumnosController.alumno.apellidoMaterno}" required="true" validatorMessage="Formato Incorrecto">
+                         <f:validateRegex pattern="^[A-Z]([a-z]){2,10}(\s[A-Z][a-z]{2,10}){0,3}$" />
+                    </p:inputText>
+                    <p:message for="apellidoMaterno" />
+
+                    <h:outputLabel value="Numero de cuenta"/>
+                    <p:inputText id="cuenta" validatorMessage="Formato incorrecto" value="#{alumnosController.alumno.numeroCuenta}" required="true">
+                        <f:validateRegex pattern="^[0-9]{9}$" />
+                    </p:inputText>
+                    <p:message for="cuenta" />
+
+                    <p:commandButton 
+                                    value="alta"
+                                     ajax="true" 
+                                     update="@form :lista" 
+                                     actionListener="#{alumnosController.guardaAlumno()}" /> 
+                </h:panelGrid>
+            </h:form>
+        
+            <h:form id="lista">
+              <p:dataTable value="#{alumnosController.alumnos}" var="_alumno" >
+                        <p:column headerText="Nombre">#{_alumno.nombre}</p:column>
+                        <p:column headerText="Apellido paterno">#{_alumno.apellidoPaterno}</p:column>
+                        <p:column headerText="Apellido materno">#{_alumno.apellidoMaterno}</p:column>
+                        <p:column headerText="Número de cuenta">#{_alumno.numeroCuenta}</p:column>
+                        <p:column headerText="Eliminar">
+                            <p:commandButton actionListener="#{alumnosController.borraAlumno(_alumno)}" update="@form" value="eliminar">
+
+                            </p:commandButton>
+                        </p:column>
+                        <p:column headerText="Detalles">                      
+                            <p:commandButton  oncomplete="PF('detalleAlumno').show()" update="@form :detalles"   value="ver" ajax="true"   >
+                                <f:setPropertyActionListener value="#{_alumno}" target="#{alumnosController.alumnoSeleccionado}" />
+                            </p:commandButton>
+                        </p:column>
+              </p:dataTable>
+            
+            </h:form>
+            <br/>
+            <br/>
+            <h:form id="detalles">
+                <p:dialog widgetVar="detalleAlumno" modal="true" >
+                   <p:panelGrid columns="2" rendered="#{alumnosController.alumnoSeleccionado ne null}" >
+                        <p:outputLabel value="Nombre"/>
+                        <p:outputLabel value="#{alumnosController.alumnoSeleccionado.nombre}" />
+
+                         <p:outputLabel value="Apellido Paterno"/>
+                         <p:outputLabel value="#{alumnosController.alumnoSeleccionado.apellidoPaterno}" />
+
+                         <p:outputLabel value="Apellido Materno"/>
+                         <p:outputLabel value="#{alumnosController.alumnoSeleccionado.apellidoMaterno}" />
+
+                         <p:outputLabel value="Cuenta"/>
+                         <p:outputLabel value="#{alumnosController.alumnoSeleccionado.numeroCuenta}" />
+                    </p:panelGrid>
+                </p:dialog>
+            </h:form>
+
+           </ui:define>
        </ui:composition>
+    
     </h:body>
 </html>

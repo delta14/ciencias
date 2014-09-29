@@ -6,6 +6,7 @@
 
 package mx.unam.fciencias.dao;
 
+import java.util.List;
 import mx.unam.fciencias.model.dto.AlumnoDto;
 
 /**
@@ -16,6 +17,10 @@ public class AlumnoDAO extends AbstractDAO<AlumnoDto>{
 
     public AlumnoDAO() {
         super(AlumnoDto.class);
+    }
+    
+    public List<AlumnoDto> selectAllAlumnos(){
+        return em.createNamedQuery(AlumnoDto.SELECT_ALL).getResultList();
     }
     
 }
