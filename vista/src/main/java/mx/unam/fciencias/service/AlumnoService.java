@@ -8,6 +8,7 @@ package mx.unam.fciencias.service;
 import java.io.Serializable;
 import java.util.List;
 import mx.unam.fciencias.dao.AlumnoDAO;
+import mx.unam.fciencias.dao.jdbc.JdbcAlumnoDAO;
 import mx.unam.fciencias.data.AlumnoDAOInterface;
 import mx.unam.fciencias.model.dto.AlumnoDto;
 
@@ -20,7 +21,7 @@ public class AlumnoService implements Serializable{
    private  AlumnoDAOInterface alumnoDAO;
    
    public  AlumnoService(){
-        alumnoDAO=new AlumnoDAO();
+        alumnoDAO=new JdbcAlumnoDAO();
    }
    
    public List<AlumnoDto> selectAllAlumnos(){
