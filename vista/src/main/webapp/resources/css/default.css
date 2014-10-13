@@ -4,6 +4,8 @@ body {
     font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
     color: #000000;  
     margin: 10px;
+     background-image: url('/vista/faces/javax.faces.resource/ciencias.png?ln=img')
+    
 }
 
 h1 {
@@ -14,6 +16,7 @@ h1 {
     margin: 0px;
     padding: 0px;
     color: #D20005;
+    
 }
 
 a:link, a:visited {
@@ -27,3 +30,8 @@ a:link:hover, a:visited:hover  {
   font-weight : bold;
   text-decoration : underline;
 }
+
+.fondo{
+   
+}
+

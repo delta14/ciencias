@@ -15,7 +15,7 @@ and open the template in the editor.
         <title>JavaServerFaces 2.0</title>
     </h:head>
     
-    <h:body>
+    <h:body >
         
     <ui:composition template="./template/principal.xhtml">
                 
@@ -46,11 +46,14 @@ and open the template in the editor.
                     <p:inputText id="cuenta" validatorMessage="Formato incorrecto" value="#{alumnosController.alumno.numeroCuenta}" required="true">
                         <f:validateRegex pattern="^[0-9]{9}$" />
                     </p:inputText>
-                    <p:message for="cuenta" />
+                     <p:message for="cuenta" />
+                     
 
                     <p:commandButton 
                                     value="alta"
                                      ajax="true" 
+                                    
+                                     
                                      update="@form :lista" 
                                      actionListener="#{alumnosController.guardaAlumno()}" /> 
                 </h:panelGrid>
@@ -64,7 +67,7 @@ and open the template in the editor.
                         <p:column headerText="Número de cuenta">#{_alumno.numeroCuenta}</p:column>
                         <p:column headerText="Eliminar">
                             <p:commandButton actionListener="#{alumnosController.borraAlumno(_alumno)}" update="@form" value="eliminar">
-
+                                <p:confirm header="Eliminar alumno" message="¿Confirmar operacion?" />
                             </p:commandButton>
                         </p:column>
                         <p:column headerText="Detalles">                      
@@ -73,6 +76,10 @@ and open the template in the editor.
                             </p:commandButton>
                         </p:column>
               </p:dataTable>
+                <p:confirmDialog global="true" >
+                    <p:commandButton type="button" value="Yes" label="Si" styleClass="ui-confirmdialog-yes"/>
+                    <p:commandButton type="button" value="No" label="No" styleClass="ui-confirmdialog-no"/>
+                </p:confirmDialog>
             
             </h:form>
             <br/>
@@ -95,8 +102,8 @@ and open the template in the editor.
                 </p:dialog>
             </h:form>
 
-           </ui:define>
-       </ui:composition>
+    </ui:define>
+ </ui:composition>
     
     </h:body>
 </html>

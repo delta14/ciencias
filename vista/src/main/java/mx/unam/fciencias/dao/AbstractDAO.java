@@ -11,11 +11,14 @@ package mx.unam.fciencias.dao;
  * and open the template in the editor.
  */
 
+import java.io.Serializable;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import mx.unam.fciencias.data.AlumnoDAOInterface;
+import mx.unam.fciencias.model.dto.AlumnoDto;
 
 
-public abstract class AbstractDAO<T> {
+public abstract class AbstractDAO<T> implements Serializable,AlumnoDAOInterface<T>{
 
     protected EntityManager em;
     protected Class<T> clase;
@@ -25,8 +28,11 @@ public abstract class AbstractDAO<T> {
         clase = c;
     }
 
+    
     public void create(T t) {
+        em.getTransaction().begin();
         em.persist(t);
+         em.getTransaction().commit();
     }
 
     public T find(Long id) {
@@ -34,13 +40,18 @@ public abstract class AbstractDAO<T> {
     }
 
     public T merge(T t) {
-        return em.merge(t);
+         em.getTransaction().begin();
+         T tl= em.merge(t);
+         em.getTransaction().commit();
+         return tl;
     }
 
     public void delete(Long id) {
         T t = em.find(clase, id);
         if (t != null) {
+             em.getTransaction().begin();
             em.remove(t);
+            em.getTransaction().commit();
         }
     }
 

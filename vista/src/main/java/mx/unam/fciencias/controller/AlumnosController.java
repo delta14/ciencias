@@ -8,13 +8,17 @@ package mx.unam.fciencias.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import mx.unam.fciencias.dao.AlumnoDAO;
+import mx.unam.fciencias.dao.jdbc.JdbcAlumnoDAO;
+import mx.unam.fciencias.data.AlumnoDAOInterface;
 import mx.unam.fciencias.model.dto.AlumnoDto;
+import mx.unam.fciencias.model.dto.CarreraDto;
 
 
 /**
@@ -26,43 +30,40 @@ import mx.unam.fciencias.model.dto.AlumnoDto;
 public class AlumnosController {
     
     private AlumnoDto alumno;
-    
+      
     private Collection<AlumnoDto> alumnos;
     
     private AlumnoDto alumnoSeleccionado;
     
-    private AlumnoDAO alumnoDAO;
+    private AlumnoDAOInterface alumnoDAO;
     
     @PostConstruct
     public void init(){
-        alumnoDAO=new AlumnoDAO();
-        alumno=new AlumnoDto();
+        alumnoDAO=new AlumnoDAO();  
+        alumno=new AlumnoDto();        
         alumnos=new ArrayList<AlumnoDto>();
-        alumnos.addAll(alumnoDAO.selectAllAlumnos());
+        alumnos.addAll(alumnoDAO.selectAll());
     }
     
     public void guardaAlumno(){
-        if(alumnos.contains(alumno)){
+        if(alumnos.contains(alumno) ){
            FacesContext fc=FacesContext.getCurrentInstance();
             fc.addMessage("validacion", 
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Alumno repetido"));
         }else{
-
-        alumnoDAO.getEm().getTransaction().begin();
+    
           alumnoDAO.create(alumno);
-            alumnoDAO.getEm().getTransaction().commit();
+           
             
             alumno=new AlumnoDto();
         }
         alumnos=new ArrayList<AlumnoDto>();
-        alumnos.addAll(alumnoDAO.selectAllAlumnos());
+        alumnos.addAll(alumnoDAO.selectAll());
     }
     
     public void borraAlumno(AlumnoDto almn){
-        if(alumnos.contains(almn)){
-            alumnoDAO.getEm().getTransaction().begin();
+        if(alumnos.contains(almn)){    
             alumnoDAO.delete(almn.getId());
-            alumnoDAO.getEm().getTransaction().commit();
         }
         else{
              FacesContext fc=FacesContext.getCurrentInstance();
@@ -71,7 +72,7 @@ public class AlumnosController {
    
        }
         alumnos=new ArrayList<AlumnoDto>();
-        alumnos.addAll(alumnoDAO.selectAllAlumnos());
+        alumnos.addAll(alumnoDAO.selectAll());
     }
 
     public AlumnoDto getAlumno() {
@@ -97,8 +98,8 @@ public class AlumnosController {
     public void setAlumnoSeleccionado(AlumnoDto alumnoSeleccionado) {
         this.alumnoSeleccionado = alumnoSeleccionado;
     }
-    
-    
-    
-    
+
+
+
+      
 }

@@ -8,12 +8,22 @@ package mx.unam.fciencias.model.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,11 +36,13 @@ import javax.validation.constraints.Size;
 @Table(name = "alumno")
 @NamedQueries(
         {
-        @NamedQuery(name=AlumnoDto.SELECT_ALL,query="SELECT a FROM AlumnoDto a")
+        @NamedQuery(name=AlumnoDto.SELECT_ALL,query="SELECT a FROM AlumnoDto a"),
+        @NamedQuery(name=AlumnoDto.SELECT_WHERE_NOMBRE,query="SELECT a FROM AlumnoDto a WHERE a.nombre=?1")
         }
 )
 public class AlumnoDto implements Serializable{
-    public static final String SELECT_ALL="select all";
+    public static final String SELECT_ALL="select all alumnos";
+    public static final String SELECT_WHERE_NOMBRE="select alumnos WHERE nombre";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
@@ -50,6 +62,11 @@ public class AlumnoDto implements Serializable{
     @NotNull
     @Size(max = 9)
     private String numeroCuenta;
+    
+    @ManyToOne(targetEntity = CarreraDto.class,cascade = CascadeType.MERGE)
+    private CarreraDto carrera;
+    
+
 
     public AlumnoDto() {
     }
@@ -100,7 +117,15 @@ public class AlumnoDto implements Serializable{
     public void setId(Long id) {
         this.id = id;
     }
+
     
+       public CarreraDto getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(CarreraDto carrera) {
+        this.carrera = carrera;
+    }
     
     
     
@@ -124,12 +149,24 @@ public class AlumnoDto implements Serializable{
     
     
     }    
+
+ 
+    
     
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
+    }
+    
+    @Override
+    public String toString() {
+    return "Nombre:"+nombre+"\n"+
+            "Ap:"+apellidoPaterno+"\n"+
+            "Am:"+apellidoMaterno+"\n"+
+            "No cuenta:"+numeroCuenta+"\n";
+    
     }
 
  
