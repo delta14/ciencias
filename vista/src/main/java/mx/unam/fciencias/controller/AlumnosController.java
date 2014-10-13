@@ -19,6 +19,7 @@ import mx.unam.fciencias.dao.jdbc.JdbcAlumnoDAO;
 import mx.unam.fciencias.data.AlumnoDAOInterface;
 import mx.unam.fciencias.model.dto.AlumnoDto;
 import mx.unam.fciencias.model.dto.CarreraDto;
+import mx.unam.fciencias.service.AlumnoService;
 
 
 /**
@@ -35,14 +36,14 @@ public class AlumnosController {
     
     private AlumnoDto alumnoSeleccionado;
     
-    private AlumnoDAOInterface alumnoDAO;
+    private AlumnoService alumnoService;
     
     @PostConstruct
     public void init(){
-        alumnoDAO=new AlumnoDAO();  
+        alumnoService=new AlumnoService();  
         alumno=new AlumnoDto();        
         alumnos=new ArrayList<AlumnoDto>();
-        alumnos.addAll(alumnoDAO.selectAll());
+        alumnos.addAll(alumnoService.selectAllAlumnos());
     }
     
     public void guardaAlumno(){
@@ -52,18 +53,18 @@ public class AlumnosController {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Alumno repetido"));
         }else{
     
-          alumnoDAO.create(alumno);
+          alumnoService.guardaAlumno(alumno);
            
             
             alumno=new AlumnoDto();
         }
         alumnos=new ArrayList<AlumnoDto>();
-        alumnos.addAll(alumnoDAO.selectAll());
+        alumnos.addAll(alumnoService.selectAllAlumnos());
     }
     
     public void borraAlumno(AlumnoDto almn){
         if(alumnos.contains(almn)){    
-            alumnoDAO.delete(almn.getId());
+            alumnoService.eliminaAlumno(almn);
         }
         else{
              FacesContext fc=FacesContext.getCurrentInstance();
@@ -72,7 +73,7 @@ public class AlumnosController {
    
        }
         alumnos=new ArrayList<AlumnoDto>();
-        alumnos.addAll(alumnoDAO.selectAll());
+        alumnos.addAll(alumnoService.selectAllAlumnos());
     }
 
     public AlumnoDto getAlumno() {
