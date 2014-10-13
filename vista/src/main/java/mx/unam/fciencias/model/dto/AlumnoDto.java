@@ -66,6 +66,19 @@ public class AlumnoDto implements Serializable{
     @ManyToOne(targetEntity = CarreraDto.class,cascade = CascadeType.MERGE)
     private CarreraDto carrera;
     
+    @OneToOne(cascade = CascadeType.MERGE)
+    private DatosPersonalesDto datos;
+    
+    
+    @JoinTable(name = "alumno_materia",
+            joinColumns = {@JoinColumn(name = "ID_ALUMNO")},
+            inverseJoinColumns = {@JoinColumn(name = "ID_MATERIA")}
+            )
+    @ManyToMany
+    private List<MateriaDto> materias;
+    
+    
+     
 
 
     public AlumnoDto() {
@@ -125,6 +138,22 @@ public class AlumnoDto implements Serializable{
 
     public void setCarrera(CarreraDto carrera) {
         this.carrera = carrera;
+    }
+
+    public DatosPersonalesDto getDatos() {
+        return datos;
+    }
+
+    public void setDatos(DatosPersonalesDto datos) {
+        this.datos = datos;
+    }
+
+    public List<MateriaDto> getMaterias() {
+        return materias;
+    }
+
+    public void setMaterias(List<MateriaDto> materias) {
+        this.materias = materias;
     }
     
     
