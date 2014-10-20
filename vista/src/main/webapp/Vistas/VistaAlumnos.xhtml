@@ -17,13 +17,13 @@ and open the template in the editor.
     
     <h:body >
         
-    <ui:composition template="./template/principal.xhtml">
+    <ui:composition template="../template/principal.xhtml">
                 
       <ui:define name="content">
             <p:growl autoUpdate="true" id="validacion" showSummary="true" showDetail="true"   />
         
             <h:form id="formAlumno">
-                <center>
+              
                 <h:panelGrid columns="3" >
                     <h:outputLabel value="Nombre:" />
                     <p:inputText id="nombre" validatorMessage="Formato Incorrecto" value="#{alumnosController.alumno.nombre}" required="true">
@@ -49,6 +49,18 @@ and open the template in the editor.
                     </p:inputText>
                      <p:message for="cuenta" />
                      
+                     
+                     <h:outputLabel value="Carrera"/>
+                     <p:selectOneMenu id="carrera"  value="#{alumnosController.alumno.carrera}"   converter="carreraConverter">
+                         <f:selectItems value="#{alumnosController.carreras}" var="_carrera" 
+                                        itemValue="#{_carrera}" itemLabel="#{_carrera.nombre}" />
+                    </p:selectOneMenu>
+                     <p:message for="carrera" />
+                     
+                     <h:outputLabel value="Materias"/>
+                     <p:pickList id="pickListMaterias" value="#{alumnosController.pickListMaterias}" var="_materia" 
+                                 itemLabel="#{_materia.nombre}" itemValue="#{_materia}" converter="materiaConverter"  />
+                     
 
                     <p:commandButton 
                                     value="alta"
@@ -58,7 +70,10 @@ and open the template in the editor.
                                      update="@form :lista" 
                                      actionListener="#{alumnosController.guardaAlumno()}" /> 
                 </h:panelGrid>
-                </center>
+                
+                
+                 
+                
             </h:form>
         
             <h:form id="lista">
@@ -100,7 +115,24 @@ and open the template in the editor.
 
                          <p:outputLabel value="Cuenta"/>
                          <p:outputLabel value="#{alumnosController.alumnoSeleccionado.numeroCuenta}" />
+                         
+                       
+                         
                     </p:panelGrid>
+                    <p:panelGrid columns="2" rendered="#{alumnosController.alumnoSeleccionado.carrera ne null}">
+                              <p:outputLabel value="Carrera"/>
+                              <p:outputLabel value="#{alumnosController.alumnoSeleccionado.carrera.nombre}" />
+                              
+                              <p:outputLabel value="Plan"/>
+                              <p:outputLabel value="#{alumnosController.alumnoSeleccionado.carrera.plan}" />
+                    </p:panelGrid>
+                    <p:dataTable id="materiaAlumno" value="#{alumnosController.alumnoSeleccionado.materias}" 
+                                 rendered="#{alumnosController.alumnoSeleccionado.materias ne null and alumnosController.alumnoSeleccionado.materias.size() gt 0}"
+                                 var="_materiasAlumno"
+                                 style="width: 400px">
+                        <p:column headerText="Materia">#{_materiasAlumno.nombre}</p:column>
+                        <p:column headerText="Semestre">#{_materiasAlumno.semestre}</p:column>
+                    </p:dataTable>
                 </p:dialog>
             </h:form>
 

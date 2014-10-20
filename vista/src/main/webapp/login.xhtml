@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+      
+        <ui:composition template="template/principal.xhtml">
+          
+              <ui:define name="left">
+            <!--Con esto logramos esconder el menu izquerdo, para esta vista -->
+        </ui:define>
+            <ui:define name="content">
+            
+                <h:form prependId="false">
+                   
+                                                         
+                                <h:panelGrid columns="3">
+                                    
+                                    Usuario
+                                    <p:inputText  id="j_username" value="#{loginController.username}" required="true" />
+                                    <p:message for="j_username"/>
+
+                                  
+                                    Password
+                                    <p:password id="j_password" value="#{loginController.password}" required="true"  />
+                                    <p:message for="j_password"/>
+                                  
+                                    <p:commandButton id="login" type="submit" action="#{loginController.login()}" value="#{msgs.login_button_login}" ajax="false"/>
+                                    
+
+                                </h:panelGrid>
+                           
+                </h:form>
+            
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>

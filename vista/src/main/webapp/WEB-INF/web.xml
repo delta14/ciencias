@@ -16,10 +16,11 @@
             <param-name>javax.faces.CONFIG_FILES</param-name>
             <param-value>/WEB-INF/faces-config.xml</param-value>
         </context-param>
- 
+        
+
 	<!-- Pagina de Inicio  -->
 	<welcome-file-list>
-		<welcome-file>faces/mensaje.xhtml</welcome-file>
+		<welcome-file>login.xhtml</welcome-file>
 	</welcome-file-list>
  
 	<!-- JSF mapping -->

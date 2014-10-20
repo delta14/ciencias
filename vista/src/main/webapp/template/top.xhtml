@@ -17,5 +17,15 @@
         
     </h:panelGrid>
     <h1><p:outputLabel value="#{msg.welcome}" /></h1>
-          
+    
+    <!--
+    <p:outputLabel  value="Session: {loginController.currentUser}" />
+    <br/>
+     <h:form>
+        <p:commandLink actionListener="{loginController.logout()}" value="Cerrar Session" 
+                       action="login" rendered="{loginController.currentUser ne 'anonymousUser'}" 
+                       ajax="false"
+                       />
+     </h:form>
+    -->
 </ui:composition>
