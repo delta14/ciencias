@@ -169,11 +169,11 @@ public class AlumnoDto implements Serializable{
          if ((this.id == null && alumno.id != null) || (this.id != null && !this.id.equals(alumno.id))) {
             return false;
         }
-        if(alumno.getNumeroCuenta()!=null && alumno.getNumeroCuenta().equals(this.numeroCuenta) ){
-            return true;
+        if(alumno.getNumeroCuenta()==null || !alumno.getNumeroCuenta().equals(this.numeroCuenta) ){
+            return false;
         }
         else{
-            return false;
+            return true;
         }
     
     

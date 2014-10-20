@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 /**
  *
@@ -18,6 +21,11 @@ import javax.faces.bean.SessionScoped;
  */
 //Clase ManagedBean, es decir es administrada por el servidor.
 //en el archivo faces-config.xml se define su nombre
+
+
+//@Controller("controller")
+//@Scope("session")
+
 @ManagedBean(name="controller")
 @SessionScoped
 public class VistaController {

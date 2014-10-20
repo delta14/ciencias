@@ -7,26 +7,47 @@ package mx.unam.fciencias.service;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
 import mx.unam.fciencias.dao.AlumnoDAO;
-import mx.unam.fciencias.dao.jdbc.JdbcAlumnoDAO;
-import mx.unam.fciencias.data.AlumnoDAOInterface;
+import mx.unam.fciencias.dao.CarreraDAO;
+import mx.unam.fciencias.dao.MateriaDAO;
 import mx.unam.fciencias.model.dto.AlumnoDto;
+import mx.unam.fciencias.model.dto.CarreraDto;
+import mx.unam.fciencias.model.dto.MateriaDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author guillermorojas
  */
+//@Service("alumnoService")
 public class AlumnoService implements Serializable{
     
-   private  AlumnoDAOInterface alumnoDAO;
+   //@Autowired 
+   private  AlumnoDAO alumnoDAO=new AlumnoDAO();
    
+   //@Autowired 
+   private  CarreraDAO carreraDAO=new CarreraDAO();
+   
+   //@Autowired 
+   private  MateriaDAO materiaDAO=new MateriaDAO();
+  
    public  AlumnoService(){
-        alumnoDAO=new JdbcAlumnoDAO();
+   }
+   
+   public List<MateriaDto> selectAllMaterias(){
+       return materiaDAO.selectAll();
    }
    
    public List<AlumnoDto> selectAllAlumnos(){
        return alumnoDAO.selectAll();
+   }
    
+   public List<CarreraDto> selectAllCarreras(){
+       return carreraDAO.selectAll();
    }
    
    public void eliminaAlumno(AlumnoDto alumno){

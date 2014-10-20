@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -23,7 +25,14 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "materia")
+@NamedQueries(
+        {
+        @NamedQuery(name=MateriaDto.SELECT_ALL,query="SELECT m FROM MateriaDto m")
+        }
+)
 public class MateriaDto implements Serializable {
+    
+    public static final String SELECT_ALL="Select all materias";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +44,7 @@ public class MateriaDto implements Serializable {
     @NotNull
     private String semestre;
     
+
 
 
     public Long getId() {
@@ -79,7 +89,7 @@ public class MateriaDto implements Serializable {
             return false;
         }
         else{
-            return false;
+            return true;
         }
     
     

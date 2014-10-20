@@ -14,36 +14,53 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import mx.unam.fciencias.dao.AlumnoDAO;
-import mx.unam.fciencias.dao.jdbc.JdbcAlumnoDAO;
-import mx.unam.fciencias.data.AlumnoDAOInterface;
 import mx.unam.fciencias.model.dto.AlumnoDto;
 import mx.unam.fciencias.model.dto.CarreraDto;
+import mx.unam.fciencias.model.dto.MateriaDto;
 import mx.unam.fciencias.service.AlumnoService;
+import org.primefaces.model.DualListModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 
 /**
  *
  * @author guillermorojas
  */
-@ManagedBean
+//@Controller("alumnosController")
+//@Scope("session")
+@ManagedBean(name="alumnosController")
 @SessionScoped
 public class AlumnosController {
     
+    //@Autowired
+    private AlumnoService alumnoService=new AlumnoService();
+    
     private AlumnoDto alumno;
       
-    private Collection<AlumnoDto> alumnos;
+    private List<AlumnoDto> alumnos;
+    
+    private List<CarreraDto> carreras;
+    
+    private List<MateriaDto> materias;
     
     private AlumnoDto alumnoSeleccionado;
     
-    private AlumnoService alumnoService;
+   private DualListModel<MateriaDto> pickListMaterias;
     
     @PostConstruct
     public void init(){
-        alumnoService=new AlumnoService();  
-        alumno=new AlumnoDto();        
+        alumno=new AlumnoDto();
+        alumno.setMaterias(new ArrayList<MateriaDto>());
         alumnos=new ArrayList<AlumnoDto>();
         alumnos.addAll(alumnoService.selectAllAlumnos());
+        
+        carreras=alumnoService.selectAllCarreras();
+        materias=alumnoService.selectAllMaterias();
+        
+        pickListMaterias = new DualListModel<MateriaDto>(materias, alumno.getMaterias());
+        
     }
     
     public void guardaAlumno(){
@@ -52,14 +69,10 @@ public class AlumnosController {
             fc.addMessage("validacion", 
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Alumno repetido"));
         }else{
-    
-          alumnoService.guardaAlumno(alumno);
-           
-            
-            alumno=new AlumnoDto();
+            alumno.setMaterias(pickListMaterias.getTarget());
+            alumnoService.guardaAlumno(alumno);
         }
-        alumnos=new ArrayList<AlumnoDto>();
-        alumnos.addAll(alumnoService.selectAllAlumnos());
+       init();
     }
     
     public void borraAlumno(AlumnoDto almn){
@@ -70,10 +83,8 @@ public class AlumnosController {
              FacesContext fc=FacesContext.getCurrentInstance();
             fc.addMessage("validacion", 
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Error en la operacion"));
-   
        }
-        alumnos=new ArrayList<AlumnoDto>();
-        alumnos.addAll(alumnoService.selectAllAlumnos());
+       init();
     }
 
     public AlumnoDto getAlumno() {
@@ -84,13 +95,11 @@ public class AlumnosController {
         this.alumno = alumno;
     }
 
-    public Collection<AlumnoDto> getAlumnos() {
+    public List<AlumnoDto> getAlumnos() {
         return alumnos;
     }
 
-    public void setAlumnos(Collection<AlumnoDto> alumnos) {
-        this.alumnos = alumnos;
-    }
+   
 
     public AlumnoDto getAlumnoSeleccionado() {
         return alumnoSeleccionado;
@@ -100,7 +109,41 @@ public class AlumnosController {
         this.alumnoSeleccionado = alumnoSeleccionado;
     }
 
+    public List<CarreraDto> getCarreras() {
+        return carreras;
+    }
 
+    public Collection<MateriaDto> getMaterias() {
+        return materias;
+    }
+
+ 
+
+    public void setAlumnos(List<AlumnoDto> alumnos) {
+        this.alumnos = alumnos;
+    }
+
+  
+
+    public void setCarreras(List<CarreraDto> carreras) {
+        this.carreras = carreras;
+    }
+
+ 
+
+    public void setMaterias(List<MateriaDto> materias) {
+        this.materias = materias;
+    }
+
+    public DualListModel<MateriaDto> getPickListMaterias() {
+        return pickListMaterias;
+    }
+
+    public void setPickListMaterias(DualListModel<MateriaDto> pickListMaterias) {
+        this.pickListMaterias = pickListMaterias;
+    }
+
+  
 
       
 }

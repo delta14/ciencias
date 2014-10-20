@@ -14,11 +14,10 @@ package mx.unam.fciencias.dao;
 import java.io.Serializable;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import mx.unam.fciencias.data.AlumnoDAOInterface;
 import mx.unam.fciencias.model.dto.AlumnoDto;
 
 
-public abstract class AbstractDAO<T> implements Serializable,AlumnoDAOInterface<T>{
+public abstract class AbstractDAO<T> implements Serializable{
 
     protected EntityManager em;
     protected Class<T> clase;

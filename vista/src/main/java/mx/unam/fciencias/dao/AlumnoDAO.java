@@ -7,20 +7,21 @@
 package mx.unam.fciencias.dao;
 
 import java.util.List;
-import mx.unam.fciencias.data.AlumnoDAOInterface;
 import mx.unam.fciencias.model.dto.AlumnoDto;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author guillermorojas
  */
+//@Repository("alumnoDAO")
 public class AlumnoDAO extends AbstractDAO<AlumnoDto> {
 
     public AlumnoDAO() {
         super(AlumnoDto.class);
     }
     
-    @Override
+  
     public List<AlumnoDto> selectAll(){
         return em.createNamedQuery(AlumnoDto.SELECT_ALL).getResultList();
     }

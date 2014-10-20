@@ -94,7 +94,7 @@ public class DatosPersonalesDto implements Serializable {
             return false;
         }
         else{
-            return false;
+            return true;
         }
     
     
