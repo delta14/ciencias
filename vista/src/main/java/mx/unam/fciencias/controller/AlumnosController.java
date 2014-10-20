@@ -28,14 +28,12 @@ import org.springframework.stereotype.Controller;
  *
  * @author guillermorojas
  */
-//@Controller("alumnosController")
-//@Scope("session")
-@ManagedBean(name="alumnosController")
-@SessionScoped
+@Controller("alumnosController")
+@Scope("session")
 public class AlumnosController {
     
-    //@Autowired
-    private AlumnoService alumnoService=new AlumnoService();
+    @Autowired
+    private AlumnoService alumnoService;
     
     private AlumnoDto alumno;
       

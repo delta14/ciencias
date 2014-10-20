@@ -23,17 +23,17 @@ import org.springframework.stereotype.Service;
  *
  * @author guillermorojas
  */
-//@Service("alumnoService")
+@Service("alumnoService")
 public class AlumnoService implements Serializable{
     
-   //@Autowired 
-   private  AlumnoDAO alumnoDAO=new AlumnoDAO();
+   @Autowired 
+   private  AlumnoDAO alumnoDAO;
    
-   //@Autowired 
-   private  CarreraDAO carreraDAO=new CarreraDAO();
+   @Autowired 
+   private  CarreraDAO carreraDAO;
    
-   //@Autowired 
-   private  MateriaDAO materiaDAO=new MateriaDAO();
+   @Autowired 
+   private  MateriaDAO materiaDAO;
   
    public  AlumnoService(){
    }

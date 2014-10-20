@@ -16,10 +16,82 @@
             <param-name>javax.faces.CONFIG_FILES</param-name>
             <param-value>/WEB-INF/faces-config.xml</param-value>
         </context-param>
- 
+        
+
+   
+     <!--Configuracion para cargar archivos de Spring -->   
+      <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/spring/appContext.xml
+            /WEB-INF/spring/springSecurity.xml
+        </param-value>
+    </context-param>
+       <!--Configuracion para cargar archivos de    Log4j --> 
+    <listener>
+      <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+    
+
+
+
+       
+    <!-- Filtros de Spring DI -->
+    <!-- carga el appContext y el springSecurity.xml  -->   
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
+  
+
+    
+    
+    <!-- Definicion del servlet de Springn-->
+      <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring/appContext.xml</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+     <!-- Definicion del filtro de Spring para manejo de sesiones-->
+      <listener>
+        <listener-class>
+            org.springframework.security.web.session.HttpSessionEventPublisher
+        </listener-class>
+    </listener> 
+      <!-- Tipo de peticiones que van a ser procesadas por spring-->
+      <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>*.spring</url-pattern>
+    </servlet-mapping>
+    
+       
+         <!--Configuracion del filtro de Spring Security-->
+         
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+  <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+       
+
+
 	<!-- Pagina de Inicio  -->
 	<welcome-file-list>
-		<welcome-file>faces/mensaje.xhtml</welcome-file>
+		<welcome-file>login.xhtml</welcome-file>
 	</welcome-file-list>
  
 	<!-- JSF mapping -->

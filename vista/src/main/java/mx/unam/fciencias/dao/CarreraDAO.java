@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author guillermorojas
  */
-//@Repository("carreraDAO")
+@Repository("carreraDAO")
 public class CarreraDAO extends AbstractDAO<CarreraDto> {
 
     public CarreraDAO() {

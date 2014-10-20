@@ -23,11 +23,8 @@ import org.springframework.stereotype.Controller;
 //en el archivo faces-config.xml se define su nombre
 
 
-//@Controller("controller")
-//@Scope("session")
-
-@ManagedBean(name="controller")
-@SessionScoped
+@Controller("controller")
+@Scope("session")
 public class VistaController {
     
     //encapsulamiento de variables

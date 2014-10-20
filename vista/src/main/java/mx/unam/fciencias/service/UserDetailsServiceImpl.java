@@ -25,11 +25,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-//@Service("userDetailsService")
+@Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService,Serializable {
 
 
-  //  @Autowired
+    @Autowired
     private UsuarioDAO usuarioDAO;
 
     @Override

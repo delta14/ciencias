@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author guillermorojas
  */
-//@Repository("materiaDAO")
+@Repository("materiaDAO")
 public class MateriaDAO extends AbstractDAO<MateriaDto> {
 
     public MateriaDAO() {

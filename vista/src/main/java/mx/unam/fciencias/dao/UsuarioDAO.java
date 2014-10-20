@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author guillermorojas
  */
-//@Repository("usuarioDAO")
+@Repository("usuarioDAO")
 public class UsuarioDAO extends AbstractDAO<UsuarioDto> {
 
     public UsuarioDAO() {

@@ -7,9 +7,9 @@
     version="2.0">
 
     <application>
-          <!--variable-resolver>
+          <variable-resolver>
             org.springframework.web.jsf.DelegatingVariableResolver
-          </variable-resolver-->
+          </variable-resolver>
      	   <locale-config>  
                 <supported-locale>en</supported-locale>
                 <supported-locale>es</supported-locale>
@@ -40,7 +40,7 @@
          </navigation-case>
          <navigation-case> 
              <from-outcome>mensaje</from-outcome>
-             <to-view-id>/Vistas/mensaje.xhtml</to-view-id>
+             <to-view-id>/Administracion/mensaje.xhtml</to-view-id>
              <redirect/>
          </navigation-case>
           <navigation-case> 

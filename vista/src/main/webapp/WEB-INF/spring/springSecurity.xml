@@ -12,7 +12,7 @@
     <bean id="userDetailsService" class="mx.unam.fciencias.service.UserDetailsServiceImpl" />
     <security:http auto-config="true" use-expressions="true"> 
         <security:intercept-url pattern="/Vistas/**" access="isAuthenticated()"  />
-        
+         <security:intercept-url pattern="/Administracion/**" access="isAuthenticated() and hasRole('ADMINISTRADOR')"  />
         <security:form-login login-page="/login.xhtml" default-target-url="/Vistas/inicio.xhtml"  authentication-failure-url="/login.xhtml?invalid=true"/> 
         <security:logout invalidate-session="true"/> 
         <security:access-denied-handler error-page="/login.xhtml?invalid=true"/>

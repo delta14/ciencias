@@ -31,10 +31,8 @@ import org.springframework.stereotype.Controller;
 
 
 
-//@Controller("loginController")
-//@Scope("request")
-@ManagedBean(name="loginController")
-@RequestScoped
+@Controller("loginController")
+@Scope("request")
 public class LoginController implements Serializable {
 
     private String username;
@@ -60,7 +58,7 @@ public class LoginController implements Serializable {
   
     public String login() throws IOException, ServletException {
         
-      /*
+    
             ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
             RequestDispatcher dispatcher = ((ServletRequest) context.getRequest())
                     .getRequestDispatcher("/j_spring_security_check");
@@ -68,20 +66,20 @@ public class LoginController implements Serializable {
                     (ServletResponse) context.getResponse());
             FacesContext.getCurrentInstance().responseComplete();
             
-        */
+   
         return "inicio";
     }
     
 
     public String logout() throws IOException, ServletException {
-        /*
+        
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         RequestDispatcher dispatcher = ((ServletRequest) context.getRequest())
                 .getRequestDispatcher("/j_spring_security_logout");
         dispatcher.forward((ServletRequest) context.getRequest(),
                 (ServletResponse) context.getResponse());
         FacesContext.getCurrentInstance().responseComplete();
-        */
+        
         return "login";
     }
 
